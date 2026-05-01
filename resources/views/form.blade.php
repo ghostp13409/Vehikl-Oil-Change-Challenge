@@ -3,6 +3,13 @@
 @section('content')
     <h1>Oil Change Check</h1>
 
+    <div style="margin-bottom: 20px; padding: 10px; background: #f8f9fa; border: 1px solid #ddd;">
+        <strong>Quick Fill (Testing):</strong>
+        <button type="button" onclick="fillForm(6000, '{{ now()->subMonths(1)->format('Y-m-d') }}', 1000)" style="background: #6c757d; font-size: 0.8em; padding: 5px 10px;">Due (Distance)</button>
+        <button type="button" onclick="fillForm(2000, '{{ now()->subMonths(7)->format('Y-m-d') }}', 1500)" style="background: #6c757d; font-size: 0.8em; padding: 5px 10px;">Due (Time)</button>
+        <button type="button" onclick="fillForm(3000, '{{ now()->subMonths(2)->format('Y-m-d') }}', 2500)" style="background: #6c757d; font-size: 0.8em; padding: 5px 10px;">Not Due</button>
+    </div>
+
     <form action="{{ route('check') }}" method="POST">
         @csrf
 
@@ -32,4 +39,12 @@
 
         <button type="submit">Check Due Date</button>
     </form>
+
+    <script>
+        function fillForm(current, date, prev) {
+            document.getElementById('current_odometer').value = current;
+            document.getElementById('previous_oil_change_date').value = date;
+            document.getElementById('previous_oil_change_odometer').value = prev;
+        }
+    </script>
 @endsection
