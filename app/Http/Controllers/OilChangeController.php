@@ -16,22 +16,31 @@ class OilChangeController extends Controller
     public function check(Request $request)
     {
         $validated = $request->validate([
-            "current_odometer" => "required|integer|min:0",
-            "previous_oil_change_date" => "required|date|before:today",
+            "current_odometer" => [
+                "required",
+                "integer",
+                "min:0",
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($value < $request->previous_oil_change_odometer) {
+                        $fail(
+                            "The current odometer must be greater or equal to the odometer at previous oil change.",
+                        );
+                    }
+                },
+            ],
+            "previous_oil_change_date" => [
+                "required",
+                "date",
+                function ($attribute, $value, $fail) {
+                    if (!Carbon::parse($value)->isPast()) {
+                        $fail(
+                            "Date of previous oil change must be in the past.",
+                        );
+                    }
+                },
+            ],
             "previous_oil_change_odometer" => "required|integer|min:0",
         ]);
-
-        if (
-            $validated["current_odometer"] <
-            $validated["previous_oil_change_odometer"]
-        ) {
-            return back()
-                ->withErrors([
-                    "current_odometer" =>
-                        "The current odometer must be greater or equal to the odometer at previous oil change.",
-                ])
-                ->withInput();
-        }
 
         $isDue = $this->calculateIfDue($validated);
 
@@ -55,12 +64,20 @@ class OilChangeController extends Controller
 
     private function calculateIfDue($data)
     {
+        $prevDate = Carbon::parse(
+            $data["previous_oil_change_date"],
+        )->startOfDay();
         $kmSinceLast =
             $data["current_odometer"] - $data["previous_oil_change_odometer"];
-        $monthsSinceLast = Carbon::parse(
-            $data["previous_oil_change_date"],
-        )->diffInMonths(now());
 
-        return $kmSinceLast > 5000 || $monthsSinceLast > 6;
+        // A car needs an oil change if it's been MORE THAN 5000 km
+        $dueByDistance = $kmSinceLast > 5000;
+
+        // OR if it's been MORE THAN 6 months
+        // If we subtract 6 months from now, and the previous date is BEFORE that, it's more than 6 months.
+        $sixMonthsAgo = now()->subMonths(6)->startOfDay();
+        $dueByTime = $prevDate->lessThan($sixMonthsAgo);
+
+        return $dueByDistance || $dueByTime;
     }
 }

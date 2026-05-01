@@ -11,6 +11,14 @@ class OilChangeTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutMiddleware(
+            \Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class,
+        );
+    }
+
     public function test_form_is_accessible()
     {
         $response = $this->get("/");
