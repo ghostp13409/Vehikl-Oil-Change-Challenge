@@ -51,12 +51,12 @@ Start the development server:
 **Note**: Quick Testing buttons have been added to the home page for your convenience to quickly test the functionality without needing to input data manually.
 
 ### Additional Information about my skills and experties
-**Languages**: JavaScript, TypeScript, PHP, Ruby, C#, Java, Python
-**Frameworks**: React, Ruby on Rails, Laravel, ASP.Net, Spring Boot, Flutter
-**Databases**: MySQL, PostgreSQL, MongoDB, SQLite, Redis
-**Message Brokers**: RabbitMQ, Apache Kafka
-**Deployment and DevOps**: Docker, Kubernetes, Git, Azure
-**AI Tools**: Claude Code, Gemini CLI, Agentic Development, Agent , MCP Server, Skills Cline, RooCode, Cursor, Github Copilot, Agent Skills
+- **Languages**: JavaScript, TypeScript, PHP, Ruby, C#, Java, Python
+- **Frameworks**: React, Ruby on Rails, Laravel, ASP.Net, Spring Boot, Flutter
+- **Databases**: MySQL, PostgreSQL, MongoDB, SQLite, Redis
+- **Message Brokers**: RabbitMQ, Apache Kafka
+- **Deployment and DevOps**: Docker, Kubernetes, Git, Azure
+- **AI Tools**: Claude Code, Gemini CLI, Agentic Development, Agent , MCP Server, Skills Cline, RooCode, Cursor, Github Copilot, Agent Skills
 
 **Social Links**
 [LinkedIn](https://www.linkedin.com/in/parth-gajjar09) | [GitHub](https://www.github.com/ghostp13409) | [Portfolio](https://ghostp13409.github.io/)
