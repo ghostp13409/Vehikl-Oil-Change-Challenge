@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\OilChangeController;
+use App\Http\Controllers\OilChangeCheckController;
 use Illuminate\Support\Facades\Route;
 
-Route::get("/", [OilChangeController::class, "index"])->name("home");
-Route::post("/check", [OilChangeController::class, "check"])->name("check");
-Route::get("/result/{id}", [OilChangeController::class, "result"])->name(
-    "result",
-);
+Route::get('/', function () {
+    return view('oil-change.form');
+});
+
+Route::post('/check', [OilChangeCheckController::class, 'store']);
+
+Route::get('/check/{oilChangeCheck}', [OilChangeCheckController::class, 'show']);
