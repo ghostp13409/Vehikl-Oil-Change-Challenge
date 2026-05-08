@@ -9,4 +9,5 @@ Route::get('/', function () {
 
 Route::post('/check', [OilChangeCheckController::class, 'store']);
 
-Route::get('/check/{oilChangeCheck}', [OilChangeCheckController::class, 'show']);
+Route::get('/result/{oilChangeCheck}', [OilChangeCheckController::class, 'show']);
+

@@ -29,28 +29,16 @@ A car needs an oil change if either of the following is true:
     ```
 3. Install dependencies:
     ```bash
-    composer install
-    npm install
-    ```
-4. Set up the environment file:
-    ```bash
-    cp .env.example .env
-    ```
-5. Generate the application key:
-    ```bash
-    php artisan key:generate
-    ```
-6. Run database migrations:
-    ```bash
-    php artisan migrate
+    composer run setup
     ```
 
 ### Run the Application
 
 Start the development server:
 
+If running on Laravel Herd, The server should be available at [here](http://vehikl-oil-change-challenge.test/).
 ```bash
-php artisan serve
+composer run dev
 ```
 
 **Note**: Quick Testing buttons have been added to the home page for your convenience to quickly test the functionality without needing to input data manually.
